@@ -105,12 +105,13 @@ class MigrationManager(object):
                     self._create_migration(migration_datetime)
                 if performed_migrations == levels and levels > 0:
                     print(
-                        "Performed migrations: %s of %s"
-                        % (performed_migrations, levels)
+                        "Performed migrations: {} of {}".format(
+                            performed_migrations, levels
+                        )
                     )
                     break
                 else:
-                    print("Performed migrations: %s" % performed_migrations)
+                    print("Performed migrations: {}".format(performed_migrations))
 
     def _do_rollback(self, to_datetime=None, levels=0):
         performed_migrations = 0
@@ -141,12 +142,13 @@ class MigrationManager(object):
                     self._remove_migration(migration_datetime)
                 if performed_migrations == levels and levels > 0:
                     print(
-                        "Performed migrations: %s of %s"
-                        % (performed_migrations, levels)
+                        "Performed migrations: {} of {}".format(
+                            performed_migrations, levels
+                        )
                     )
                     break
                 else:
-                    print("Performed migrations: %s" % performed_migrations)
+                    print("Performed migrations: {}".format(performed_migrations))
 
     def _get_migration_names(self):
         return self.db[self.config.metastore].find().sort('migration_datetime', pymongo.DESCENDING)
