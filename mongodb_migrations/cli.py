@@ -105,9 +105,8 @@ class MigrationManager(object):
                     self._create_migration(migration_datetime)
                 if performed_migrations == levels and levels > 0:
                     print(
-                        "Performed migrations: %s" % performed_migrations
-                        + " of "
-                        + levels
+                        "Performed migrations: %s of %s"
+                        % (performed_migrations, levels)
                     )
                     break
                 else:
