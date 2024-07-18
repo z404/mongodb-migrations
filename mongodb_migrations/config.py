@@ -92,6 +92,7 @@ class Configuration(object):
         self.to_datetime = args.to_datetime
         self.description = args.description
         self.dry_run = args.dry_run
+        self.levels = args.levels
 
         if args.downgrade:
             self.execution = Execution.DOWNGRADE
