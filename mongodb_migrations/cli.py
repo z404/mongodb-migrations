@@ -100,14 +100,22 @@ class MigrationManager(object):
                     raise
                 print("Succeed to upgrade version: %s" % self.migrations[migration_datetime])
                 performed_migrations += 1
+
                 if not self.config.dry_run:
                     self._create_migration(migration_datetime)
                 if performed_migrations == levels and levels > 0:
+                    print(
+                        "Performed migrations: %s" % performed_migrations
+                        + " of "
+                        + levels
+                    )
                     break
+                else:
+                    print("Performed migrations: %s" % performed_migrations)
 
     def _do_rollback(self, to_datetime=None, levels=0):
+        performed_migrations = 0
         for migration_datetime in sorted(self.database_migration_names, reverse=True):
-            performed_migrations = 0
             if to_datetime and migration_datetime <= to_datetime:
                 break
             if self.migrations[migration_datetime]:
@@ -133,7 +141,13 @@ class MigrationManager(object):
                 if not self.config.dry_run:
                     self._remove_migration(migration_datetime)
                 if performed_migrations == levels and levels > 0:
+                    print(
+                        "Performed migrations: %s of %s"
+                        % (performed_migrations, levels)
+                    )
                     break
+                else:
+                    print("Performed migrations: %s" % performed_migrations)
 
     def _get_migration_names(self):
         return self.db[self.config.metastore].find().sort('migration_datetime', pymongo.DESCENDING)
