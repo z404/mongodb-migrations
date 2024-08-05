@@ -107,7 +107,7 @@ mongodb-migrate --url mongodb://127.0.0.1:27017/test --migrations examples --to_
 
 To upgrade/downgrade only to specific levels, use `--levels`. This command will downgrade 2 levels from the current latest migration:
 ```bash
-mongodb-migrate --url mongodb://127.0.0.1:27017/test --migrations examples --levels 2
+mongodb-migrate --url mongodb://127.0.0.1:27017/test --downgrade --migrations examples --levels 2
 ```
 
 ## Getting involved
